@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from weather import get_current_weather
+from nba import get_player_stats
 from waitress import serve
 
 app = Flask(__name__)
@@ -27,11 +27,11 @@ def player_stats():
         return render_template('city-not-found.html')
 
     return render_template(
-        "weather.html",
-        title=weather_data["name"],
-        status=weather_data["weather"][0]["description"].capitalize(),
-        temp=f"{weather_data['main']['temp']:.1f}",
-        feels_like=f"{weather_data['main']['feels_like']:.1f}"
+        "nba.html",
+        title=player_stats["name"],
+        status=player_stats["weather"][0]["description"].capitalize(),
+        temp=f"{player_stats['main']['temp']:.1f}",
+        feels_like=f"{player_stats['main']['feels_like']:.1f}"
     )
 
 

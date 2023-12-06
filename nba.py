@@ -18,16 +18,16 @@ def get_player_stats(player="Tyler Herro"):
 
 
 if __name__ == "__main__":
-    print('\n*** Get Current Weather Conditions ***\n')
+    print('\n*** Get NBA Stats ***\n')
 
-    city = input("\nPlease enter a city name: ")
+    city = input("\nPlease enter a player name: ")
 
     # Check for empty strings or string with only spaces
     # This step is not required here
     # if not bool(city.strip()):
     #     city = "Kansas City"
 
-    player_stats = get_current_weather(city)
+    player_stats = get_player_stats(city)
 
     print("\n")
     pprint(player_stats)
