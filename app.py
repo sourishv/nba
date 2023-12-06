@@ -11,19 +11,19 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/weather')
-def get_weather():
-    city = request.args.get('city')
+@app.route('/player_stats')
+def player_stats():
+    player = request.args.get('player')
 
     # Check for empty strings or string with only spaces
-    if not bool(city.strip()):
+    if not bool(player.strip()):
         # You could render "City Not Found" instead like we do below
-        city = "Kansas City"
+        player = "Tyler Herro"
 
-    weather_data = get_current_weather(city)
+    player_stats = get_player_stats(player)
 
     # City is not found by API
-    if not weather_data['cod'] == 200:
+    if not player_stats['cod'] == 200:
         return render_template('city-not-found.html')
 
     return render_template(

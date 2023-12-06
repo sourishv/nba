@@ -2,17 +2,19 @@ from dotenv import load_dotenv
 from pprint import pprint
 import requests
 import os
+from nba_api.stats.static import players
+from nba_api.stats.endpoints import playercareerstats
 
 load_dotenv()
 
 
-def get_current_weather(city="Chantilly"):
+def get_player_stats(player="Tyler Herro"):
 
-    request_url = f'http://api.openweathermap.org/data/2.5/weather?appid={os.getenv("API_KEY")}&q={city}&units=imperial'
+    player_id = [player for player in nba_players if player["full_name"] == "player"][0]
 
-    weather_data = requests.get(request_url).json()
+    player_stats = playercareerstats.PlayerCareerStats(player_id="203076")
 
-    return weather_data
+    return player_stats
 
 
 if __name__ == "__main__":
@@ -25,7 +27,7 @@ if __name__ == "__main__":
     # if not bool(city.strip()):
     #     city = "Kansas City"
 
-    weather_data = get_current_weather(city)
+    player_stats = get_current_weather(city)
 
     print("\n")
-    pprint(weather_data)
+    pprint(player_stats)

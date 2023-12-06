@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} NBA Stats</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>{{ title }} NBA Stats</h1>
+    <p>{{ player }} and {{ stats }} </p>
+    <p>PPG: {{ PTS }} &deg;</p>
+    <p>Rebounds: {{ REB }} &deg;</p>
+    <p>Assists: {{ AST }} &deg;</p>
+
+
+    <form action="/player_stats">
+        <input type="text" name="player" id="player_name" placeholder="Enter a player's full name" />
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
