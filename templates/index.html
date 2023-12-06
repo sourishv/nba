@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Get Current Weather</title>
-    <link href="{{  url_for('static', filename='styles/styles.css')}} " rel="stylesheet" />
+    <title>Get NBA Stats</title>
+    <link href="{{  url_for('static', filename='styles/style.css')}} " rel="stylesheet" />
 </head>
 <body>
-    <h1>Get Weather Conditions</h1>
-    <form action="/weather">
-        <input type="text" name="city" id="city" placeholder="Enter a City" />
+    <h1>Get NBA Player Stats</h1>
+    <form action="/player">
+        <input type="text" name="player" id="player" placeholder="Enter a NBA Player" />
         <button type="submit">Submit</button>
     </form>
 </body>

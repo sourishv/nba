@@ -13,14 +13,14 @@ def index():
 
 @app.route('/player_stats')
 def player_stats():
-    player = request.args.get('player')
+    player = request.args.get('my_player')
 
     # Check for empty strings or string with only spaces
     if not bool(player.strip()):
         # You could render "City Not Found" instead like we do below
-        player = "Tyler Herro"
+        my_player = "Tyler Herro"
 
-    player_stats = get_player_stats(player)
+    player_stats = get_player_stats(my_player)
 
     # City is not found by API
     if not player_stats['cod'] == 200:
@@ -28,11 +28,12 @@ def player_stats():
 
     return render_template(
         "nba.html",
-        title=player_stats["name"],
-        status=player_stats["weather"][0]["description"].capitalize(),
-        temp=f"{player_stats['main']['temp']:.1f}",
-        feels_like=f"{player_stats['main']['feels_like']:.1f}"
+        player = player_stats["full_name"],
+        PTS = player_stats["PTS"],
+        REB = player_stats["REB"],
+        AST = player_stats["AST"]
     )
+
 
 
 if __name__ == "__main__":

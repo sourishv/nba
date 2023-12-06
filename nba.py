@@ -8,13 +8,17 @@ from nba_api.stats.endpoints import playercareerstats
 load_dotenv()
 
 
-def get_player_stats(player="Tyler Herro"):
+def get_player_stats(my_player="Tyler Herro"):
 
-    player_id = [player for player in nba_players if player["full_name"] == "player"][0]
+    nba_players = players.get_players()
 
-    player_stats = playercareerstats.PlayerCareerStats(player_id="203076")
+    player_id = [player[0]["id"] for player in nba_players if player["full_name"] == my_player]
 
-    return player_stats
+    player_stats = playercareerstats.PlayerCareerStats(player_id)
+
+    stat_frame = player_stats.get_data_frames()[0]
+
+    return stat_frame.iloc[-1]
 
 
 if __name__ == "__main__":
