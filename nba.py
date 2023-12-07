@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     my_player = input("\nPlease enter a player name: ")
 
-    player_stats = get_player_stats(my_player)
+    player_stats = get_player_stats(my_player)[0]
 
     print("\n")
     pprint(player_stats)
