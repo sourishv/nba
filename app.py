@@ -14,7 +14,6 @@ def index():
 @app.route('/nba')
 def get_stats():
     my_player = request.args.get('my_player')
->>>>>>> c21e0049738f6e071402d4c5dc1d8a272c03eaa3
 
     # Check for empty strings or string with only spaces
     if not bool(my_player.strip()):
