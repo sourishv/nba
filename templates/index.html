@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Get NBA Stats</title>
+    <link href="{{  url_for('static', filename='styles/style.css')}} " rel="stylesheet" />
+</head>
+<body>
+    <h1>Get NBA Player Stats</h1>
+    <form action="/nba">
+        <input type="text" name="my_player" id="my_player" placeholder="Enter a NBA Player" />
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
