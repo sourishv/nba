@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} NBA Stats</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <h1> {{ title }} </h1>
+    <p> {{ player1 }} vs. {{ player2 }} </p>
+
+    {% for stat in selected_stats %}
+    <p>{{ stat }}:
+        {{ stats1.get(stat, 'N/A') }} 
+        {% if stats2[stat] is defined and stats1[stat] is defined %}
+            {% if stats1[stat] > stats2[stat] %}
+                &gt;
+            {% elif stats1[stat] < stats2[stat] %}
+                &lt;
+            {% else %}
+                =
+            {% endif %}
+        {% else %}
+            =
+        {% endif %}
+        {{ stats2.get(stat, 'N/A') }}</p>
+    {% endfor %}
+
+    <p>{{ better_player }} is the better NBA player.</p>
+</body>
+
+</html>

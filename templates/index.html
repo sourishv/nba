@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compare NBA Players!</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+    <style>
+        /* Add custom styling for smaller checkboxes and stat options */
+        input[type="checkbox"] {
+            transform: scale(0.7);
+            margin-right: 5px;
+        }
+
+        select[name="stats"] {
+            font-size: 0.9em;
+        }
+
+        /* Add styling for the three-column layout */
+        #checkboxContainer {
+            column-count: 3;
+            column-gap: 20px;
+        }
+    </style>
+    <!-- Include other styles or scripts as needed -->
+</head>
+
+<body>
+    <h1>Compare NBA Players!</h1>
+
+    <!-- Player Comparison Form -->
+    <form action="/nba" method="post">
+        <label for="player1">Player 1:</label>
+        <input type="text" name="player1" id="player1" placeholder="Enter the first NBA player" required />
+        
+        <label for="player2">Player 2:</label>
+        <input type="text" name="player2" id="player2" placeholder="Enter the second player" required />
+        
+        <br><br>
+
+        <label for="stats">Choose Stats:</label>
+        <div id="checkboxContainer">
+            <!-- Checkboxes are added dynamically in the JavaScript code -->
+        </div>
+
+        <br><br>
+
+        <button type="submit">Compare Players</button>
+    </form>
+
+    <script>
+        var predefinedStats = [
+            "GP", "GS", "MIN", "FGM", "FGA", "FG_PCT", "FG3M", "FG3A", "FG3_PCT",
+            "FTM", "FTA", "FT_PCT", "OREB", "DREB", "REB", "AST", "STL", "BLK",
+            "TOV", "PF", "PTS"
+        ];
+
+        // Automatically add checkboxes on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            addPredefinedCheckboxes();
+        });
+
+        function addPredefinedCheckboxes() {
+            var container = document.getElementById("checkboxContainer");
+
+            for (var i = 0; i < predefinedStats.length; i++) {
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.name = "stats[]";
+                checkbox.value = predefinedStats[i];
+
+                var label = document.createElement("label");
+                label.innerHTML = predefinedStats[i];
+
+                container.appendChild(checkbox);
+                container.appendChild(label);
+                container.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+</body>
+
+</html>
