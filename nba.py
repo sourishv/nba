@@ -46,7 +46,16 @@ def get_player_stats(my_player='Tyler Herro', selected_stats=None):
         # Convert all stats to a dictionary
         stats_dict = combined_data.to_dict()
 
-    return stats_dict
+    player_name = player_dict["full_name"]
+    player_id = my_id
+
+    return [player_name, player_id, stats_dict]
+
+# The rest of your code remains unchanged
+
+def get_player_image_url(player_id):
+    base_url = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/"
+    return f"{base_url}{player_id}.png"
 
 if __name__ == "__main__":
     print('\n*** Get NBA Stats ***\n')
@@ -61,6 +70,8 @@ if __name__ == "__main__":
     else:
         player_stats = player_data["stats"]
         player_name = player_data["player_name"]
+        player_image_url = player_data["player_image_url"]
 
         print(f"\nStats for {player_name}:\n")
         pprint(player_stats)
+        print(f"Player Image URL: {player_image_url}")

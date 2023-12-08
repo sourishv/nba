@@ -1,35 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} NBA Stats</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+    <title>{{ title }}</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 85%;
+        }
+
+        .player-container {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .bigger-text {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-
 <body>
-    <h1> {{ title }} </h1>
-    <p> {{ player1 }} vs. {{ player2 }} </p>
+    <h1>{{ title }}</h1>
+    <div class="player-container">
+        <img src="{{ player1_image_url }}" alt="{{ player1 }} Image">
+        <h2>{{ player1 }}</h2>
+        <!-- Display player 1 stats -->
+        {% for key, value in stats1.items() %}
+            <p>{{ key }}: {{ value }}</p>
+        {% endfor %}
+    </div>
+    <div class="player-container">
+        <img src="{{ player2_image_url }}" alt="{{ player2 }} Image">
+        <h2>{{ player2 }}</h2>
+        <!-- Display player 2 stats -->
+        {% for key, value in stats2.items() %}
+            <p>{{ key }}: {{ value }}</p>
+        {% endfor %}
+    </div>
 
-    {% for stat in selected_stats %}
-    <p>{{ stat }}:
-        {{ stats1.get(stat, 'N/A') }} 
-        {% if stats2[stat] is defined and stats1[stat] is defined %}
-            {% if stats1[stat] > stats2[stat] %}
-                &gt;
-            {% elif stats1[stat] < stats2[stat] %}
-                &lt;
-            {% else %}
-                =
-            {% endif %}
-        {% else %}
-            =
-        {% endif %}
-        {{ stats2.get(stat, 'N/A') }}</p>
-    {% endfor %}
+    <p class="bigger-text">Better Player: {{ better_player }}</p>
 
-    <p>{{ better_player }} is the better NBA player.</p>
+    <!-- Button for new comparison -->
+    <form action="/" method="get">
+        <button type="submit" class="bigger-text">New Comparison</button>
+    </form>
 </body>
-
 </html>
