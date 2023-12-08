@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,44 +10,65 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 85%;
+            text-align: center;
         }
 
         .player-container {
-            text-align: center;
-            margin: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px;
         }
 
-        .bigger-text {
-            font-size: 1.5em;
-            margin-top: 20px;
+        .player-container img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .stat-item {
+            margin: 0 10px;
+        }
+
+        .comparison-container {
+            font-size: 24px;
+            margin: 20px 0;
         }
     </style>
 </head>
+
 <body>
     <h1>{{ title }}</h1>
     <div class="player-container">
-        <img src="{{ player1_image_url }}" alt="{{ player1 }} Image">
-        <h2>{{ player1 }}</h2>
-        <!-- Display player 1 stats -->
-        {% for key, value in stats1.items() %}
-            <p>{{ key }}: {{ value }}</p>
+        <div>
+            <img src="{{ player1_image_url }}" alt="{{ player1 }} Image">
+            <h2>{{ player1 }}</h2>
+        </div>
+        <div>
+            <img src="{{ player2_image_url }}" alt="{{ player2 }} Image">
+            <h2>{{ player2 }}</h2>
+        </div>
+    </div>
+    <div class="stats-container">
+        {% for stat in selected_stats %}
+        <div class="stat-item">
+            <p>{{ stat }} Per Game: {{ stats1[stat] }}</p>
+            <span>{% if stats1[stat] > stats2[stat] %}&gt;{% elif stats1[stat] < stats2[stat] %}&lt;{% else %}={{ stats1[stat] }}{% endif %}</span>
+            <p>{{ stats2[stat] }} Per Game</p>
+        </div>
         {% endfor %}
     </div>
-    <div class="player-container">
-        <img src="{{ player2_image_url }}" alt="{{ player2 }} Image">
-        <h2>{{ player2 }}</h2>
-        <!-- Display player 2 stats -->
-        {% for key, value in stats2.items() %}
-            <p>{{ key }}: {{ value }}</p>
-        {% endfor %}
-    </div>
-
-    <p class="bigger-text">Better Player: {{ better_player }}</p>
+    <p class="comparison-container">Better Player: {{ better_player }}</p>
 
     <!-- Button for new comparison -->
     <form action="/" method="get">
-        <button type="submit" class="bigger-text">New Comparison</button>
+        <button type="submit">New Comparison</button>
     </form>
 </body>
+
 </html>

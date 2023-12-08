@@ -1,8 +1,10 @@
-from pprint import pprint
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playercareerstats
 from difflib import get_close_matches
 import pandas as pd
+
+def get_player_image_url(player_id):
+    return f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png"
 
 def get_player_stats(my_player='Tyler Herro', selected_stats=None):
     nba_players = players.get_players()
@@ -21,24 +23,27 @@ def get_player_stats(my_player='Tyler Herro', selected_stats=None):
     stat_frame = my_player_stats.get_data_frames()
 
     # Extract data for regular season and post season
-    regular_season_data = stat_frame[1]  # SeasonTotalsRegularSeason
+    regular_season_data = stat_frame[3]  # SeasonTotalsRegularSeason
     post_season_data = stat_frame[2]  # SeasonTotalsPostSeason
     
     # Combine regular season and post season data
-    combined_data = pd.concat([regular_season_data, post_season_data])
+    combined_data = pd.concat([regular_season_data, post_season_data], ignore_index=True)
 
     # Filter stats based on selected_stats
     if selected_stats:
         selected_stats = set(selected_stats)
-        stats_dict = {stat: combined_data.at[0, stat] for stat in selected_stats}
+        stats_dict = {}
 
         for stat in selected_stats:
             # Check if the stat is a percentage and average them
             if stat.endswith("_PCT"):
                 stat_values = combined_data[stat].mean()
             else:
-                # Sum other stats
-                stat_values = combined_data[stat].sum()
+                # Calculate per game stats for non-percentage stats
+                if stat != "GP":
+                    stat_values = combined_data[stat].sum() / combined_data["GP"].sum()
+                else:
+                    stat_values = combined_data[stat].sum()
 
             stats_dict[stat] = stat_values
 
@@ -46,31 +51,21 @@ def get_player_stats(my_player='Tyler Herro', selected_stats=None):
         # Convert all stats to a dictionary
         stats_dict = combined_data.to_dict()
 
-    player_name = player_dict["full_name"]
-    player_id = my_id
-
-    return [player_name, player_id, stats_dict]
-
-# The rest of your code remains unchanged
-
-def get_player_image_url(player_id):
-    base_url = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/"
-    return f"{base_url}{player_id}.png"
-
+    return my_player, my_id, stats_dict
 if __name__ == "__main__":
     print('\n*** Get NBA Stats ***\n')
 
     my_player = input("\nPlease enter a player name: ")
     selected_stats = input("\nPlease enter selected stats (comma-separated): ").split(',')
 
-    player_data = get_player_stats(my_player, selected_stats)
+    player_data, player_id = get_player_stats(my_player, selected_stats)
 
     if "error" in player_data:
         print(player_data["error"])
     else:
         player_stats = player_data["stats"]
         player_name = player_data["player_name"]
-        player_image_url = player_data["player_image_url"]
+        player_image_url = get_player_image_url(player_id)
 
         print(f"\nStats for {player_name}:\n")
         pprint(player_stats)
