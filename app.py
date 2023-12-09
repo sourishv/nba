@@ -39,7 +39,7 @@ def get_stats():
             better_player = player2_name
         else:
             better_player = "Neither player"
-
+        print(rounded_stats1)
         return render_template('nba.html', title='Compare NBA Players:', player1=player1_name, player2=player2_name,
                                selected_stats=selected_stats, stats1=rounded_stats1, stats2=rounded_stats2,
                                better_player=better_player, player1_image_url=player1_image_url,
@@ -51,5 +51,5 @@ def get_stats():
 def new_comparison():
     return redirect(url_for('index'))
 
-#if __name__ == "__main__":
-serve(app, host="0.0.0.0", port=8000)
+if __name__ == "__main__":
+    serve(app, host="0.0.0.0", port=8000)

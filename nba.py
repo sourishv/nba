@@ -23,7 +23,7 @@ def get_player_stats(my_player='Tyler Herro', selected_stats=None):
     stat_frame = my_player_stats.get_data_frames()
 
     # Extract data for regular season and post season
-    regular_season_data = stat_frame[3]  # SeasonTotalsRegularSeason
+    regular_season_data = stat_frame[1]  # SeasonTotalsRegularSeason
     post_season_data = stat_frame[2]  # SeasonTotalsPostSeason
     
     # Combine regular season and post season data
@@ -40,11 +40,11 @@ def get_player_stats(my_player='Tyler Herro', selected_stats=None):
                 stat_values = combined_data[stat].mean()
             else:
                 # Calculate per game stats for non-percentage stats
-                if stat != "GP":
-                    stat_values = combined_data[stat].sum() / combined_data["GP"].sum()
-                else:
+                if stat in ['GS', 'GP']:
                     stat_values = combined_data[stat].sum()
-
+                else:
+                    stat_values = (combined_data[stat].sum())/(combined_data["GP"].sum())
+            print(stat_values)
             stats_dict[stat] = stat_values
 
     else:
@@ -68,5 +68,5 @@ if __name__ == "__main__":
         player_image_url = get_player_image_url(player_id)
 
         print(f"\nStats for {player_name}:\n")
-        pprint(player_stats)
+        print(player_stats)
         print(f"Player Image URL: {player_image_url}")

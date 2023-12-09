@@ -7,9 +7,16 @@
     <title>Compare NBA Players!</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 150px;
+        }
         /* Add custom styling for smaller checkboxes and stat options */
         input[type="checkbox"] {
-            transform: scale(0.7);
+            transform: scale(1.5);
             margin-right: 5px;
         }
 
