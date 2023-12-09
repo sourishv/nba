@@ -4,21 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} NBA Stats</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+    <title>{{ title }}</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .player-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .player-container img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .stat-item {
+            margin: 0 10px;
+        }
+
+        .comparison-container {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>{{ title }} NBA Stats</h1>
-    <p>{{ player }} and {{ stats }} </p>
-    <p>PPG: {{ PTS }} </p>
-    <p>Rebounds: {{ REB }} </p>
-    <p>Assists: {{ AST }} </p>
+    <h1>{{ title }}</h1>
+    <div class="player-container">
+        <div>
+            <img src="{{ player1_image_url }}" alt="{{ player1 }} Image">
+            <h2>{{ player1 }}</h2>
+        </div>
+        <div>
+            <img src="{{ player2_image_url }}" alt="{{ player2 }} Image">
+            <h2>{{ player2 }}</h2>
+        </div>
+    </div>
+    <div class="stats-container">
+        {% for stat in selected_stats %}
+        <div class="stat-item">
+            <p>{{ stat }} Per Game: {{ stats1[stat] }}</p>
+            <span>{% if stats1[stat] > stats2[stat] %}&gt;{% elif stats1[stat] < stats2[stat] %}&lt;{% else %}={{ stats1[stat] }}{% endif %}</span>
+            <p>{{ stats2[stat] }} Per Game</p>
+        </div>
+        {% endfor %}
+    </div>
+    <p class="comparison-container">Better Player: {{ better_player }}</p>
 
-
-    <form action="/nba">
-        <input type="text" name="my_player" id="my_player" placeholder="Enter a Player" />
-        <button type="submit">Submit</button>
+    <!-- Button for new comparison -->
+    <form action="/" method="get">
+        <button type="submit">New Comparison</button>
     </form>
 </body>
 
