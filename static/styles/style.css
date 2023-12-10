@@ -15,7 +15,6 @@ body {
     align-items: center;
     gap: 2rem;
     font-size: 2rem;
-    display: flex;
     text-align: center;
     padding-top: 150px;
 }
@@ -30,6 +29,7 @@ input, button {
     position: relative;
     display: inline-block;
 }
+
 input[type="checkbox"] {
     transform: scale(1.5);
     margin-right: 5px;
