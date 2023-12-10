@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, json
 from nba import get_player_stats, get_player_image_url
 from waitress import serve
 
@@ -7,7 +7,9 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    player_names = get_player_stats()[3]
+    player_names = json.dumps(player_names)
+    return render_template('index.html', player_names=player_names)
 
 @app.route('/nba', methods=['POST'])
 def get_stats():
@@ -21,8 +23,8 @@ def get_stats():
         if not bool(player2.strip()):
             player2 = "Tyler Herro"
 
-        player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats)
-        player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats)
+        player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats)[:3]
+        player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats)[:3]
 
         rounded_stats1 = {key: round(value, 2) if isinstance(value, (int, float)) else value for key, value in stats1.items()}
         rounded_stats2 = {key: round(value, 2) if isinstance(value, (int, float)) else value for key, value in stats2.items()}

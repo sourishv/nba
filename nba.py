@@ -51,7 +51,7 @@ def get_player_stats(my_player='Tyler Herro', selected_stats=None):
         # Convert all stats to a dictionary
         stats_dict = combined_data.to_dict()
 
-    return my_player, my_id, stats_dict
+    return my_player, my_id, stats_dict, player_names
 if __name__ == "__main__":
     print('\n*** Get NBA Stats ***\n')
 
