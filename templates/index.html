@@ -6,36 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Compare NBA Players!</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding-top: 150px;
-        }
-        .autocomplete {
-            /*the container must be positioned relative:*/
-            position: relative;
-            display: inline-block;
-        }
-        /* Add custom styling for smaller checkboxes and stat options */
-        input[type="checkbox"] {
-            transform: scale(1.5);
-            margin-right: 5px;
-        }
-
-        select[name="stats"] {
-            font-size: 0.9em;
-        }
-
-        /* Add styling for the three-column layout */
-        #checkboxContainer {
-            column-count: 3;
-            column-gap: 20px;
-        }
-    </style>
-    <!-- Include other styles or scripts as needed -->
+    
     <script src="/static/autocomplete.js"></script>
 </head>
 
@@ -65,7 +36,7 @@
         <script>
 
         var playerNamesJson = {{ player_names | tojson | safe }};
-        var names_json = JSON.parse(playerNamesJson);   
+        var names_json = JSON.parse(playerNamesJson);
 
         autocomplete(document.getElementById("player1"), names_json);
         autocomplete(document.getElementById("player2"), names_json);

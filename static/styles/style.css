@@ -14,10 +14,31 @@ body {
     align-items: center;
     gap: 2rem;
     font-size: 2rem;
+    display: flex;
+    text-align: center;
+    padding-top: 150px;
 }
 
 input, button {
     font-size: 2rem;
     padding: 1rem;
     border-radius: 10px;
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-right: 5px;
+}
+
+select[name="stats"] {
+    font-size: 0.9em;
+}
+
+#checkboxContainer {
+    column-count: 3;
+    column-gap: 20px;
 }
