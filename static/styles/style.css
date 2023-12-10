@@ -18,6 +18,8 @@ body {
     font-size: 2vw; /* Adjust font size using vw units */
     text-align: center;
     background-size: cover;
+    background-position: center;;
+    background-repeat: no-repeat;
 }
 
 input,
