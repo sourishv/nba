@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Compare NBA Players!</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-    
     <script src="/static/autocomplete.js"></script>
+    <script src="/static/main.js"></script>
 </head>
 
 <body>
@@ -24,53 +24,23 @@
         <br><br>
 
         <label for="stats">Choose Stats:</label>
-        <div id="checkboxContainer">
-
-        </div>
+        <div id="checkboxContainer"></div>
 
         <br><br>
 
         <button type="submit">Compare Players</button>
     </form>
 
-        <script>
-
-        var playerNamesJson = {{ player_names | tojson | safe }};
-        var names_json = JSON.parse(playerNamesJson);
-
-        autocomplete(document.getElementById("player1"), names_json);
-        autocomplete(document.getElementById("player2"), names_json);
-        </script>
-
     <script>
-        var predefinedStats = [
-            "GP", "GS", "MIN", "FGM", "FGA", "FG_PCT", "FG3M", "FG3A", "FG3_PCT",
-            "FTM", "FTA", "FT_PCT", "OREB", "DREB", "REB", "AST", "STL", "BLK",
-            "TOV", "PF", "PTS"
-        ];
-
-        // Automatically add checkboxes on page load
         document.addEventListener("DOMContentLoaded", function () {
-            addPredefinedCheckboxes();
+            var playerNamesJson = {{ player_names | tojson | safe }};
+            var names_json = JSON.parse(playerNamesJson);
+
+            autocomplete(document.getElementById("player1"), names_json);
+            autocomplete(document.getElementById("player2"), names_json);
+
+            addPredefinedStatsCheckboxes();
         });
-
-        function addPredefinedCheckboxes() {
-            var container = document.getElementById("checkboxContainer");
-
-            for (var i = 0; i < predefinedStats.length; i++) {
-                var checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.name = "stats[]";
-                checkbox.value = predefinedStats[i];
-
-                var label = document.createElement("label");
-                label.innerHTML = predefinedStats[i];
-
-                container.appendChild(checkbox);
-                container.appendChild(label);
-                container.appendChild(document.createElement("br"));
-            }
-        }
     </script>
 </body>
 
