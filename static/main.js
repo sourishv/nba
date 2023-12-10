@@ -22,4 +22,14 @@ function addPredefinedStatsCheckboxes() {
         container.appendChild(label);
         container.appendChild(document.createElement("br"));
     }
+
+    // Add event listener to the form to check if at least one checkbox is checked
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        var checkboxes = document.querySelectorAll('input[name="stats[]"]:checked');
+        if (checkboxes.length === 0) {
+            alert("Select at least one stat.");
+            event.preventDefault(); // Prevent form submission
+        }
+    });
 }
