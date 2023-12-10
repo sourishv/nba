@@ -1,15 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, json
+from flask import Flask, render_template, request, redirect, url_for, json, jsonify
 from nba import get_player_stats, get_player_image_url
 from waitress import serve
+from fuzzywuzzy import process
 
 app = Flask(__name__)
+
+player_names = get_player_stats()[3]
+player_names_json = json.dumps(player_names)
 
 @app.route('/')
 @app.route('/index')
 def index():
-    player_names = get_player_stats()[3]
-    player_names = json.dumps(player_names)
-    return render_template('index.html', player_names=player_names)
+    return render_template('index.html', player_names=player_names_json)
 
 @app.route('/nba', methods=['POST'])
 def get_stats():
@@ -43,6 +45,17 @@ def get_stats():
 @app.route('/new_comparison')
 def new_comparison():
     return redirect(url_for('index'))
+
+@app.route('/autocomplete', methods=['GET'])
+def autocomplete():
+    partial_input = request.args.get('partial_name', '')
+    matches = process.extract(partial_input, player_names, limit=5)
+    suggestions = [match[0] for match in matches]
+    
+    # Print suggestions to console for debugging
+    print('Suggestions:', suggestions)
+
+    return jsonify(suggestions)
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8000)

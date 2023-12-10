@@ -131,3 +131,5 @@ zipp==3.17.0
     # via
     #   -r requirements.in
     #   importlib-metadata
+fuzzywuzzy==0.18.0
+python-Levenshtein

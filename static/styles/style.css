@@ -29,6 +29,14 @@ input, button {
     position: relative;
     display: inline-block;
 }
+#autocompletePlayer1,
+#autocompletePlayer2 {
+    position: absolute;
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    max-height: 150px;
+    overflow-y: auto;
+}
 
 input[type="checkbox"] {
     transform: scale(1.5);
