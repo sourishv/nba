@@ -5,19 +5,45 @@
 }
 
 body {
-    padding: 2rem;
+    transform: scale(0.9);
+    padding: 2vw; /* Adjust padding using vw units */
     background-color: #333;
+    background-image: url('/static/nba%20background.jpg');
     color: whitesmoke;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    font-size: 2rem;
+    gap: 2vw; /* Adjust gap using vw units */
+    font-size: 2vw; /* Adjust font size using vw units */
+    text-align: center;
+    background-size: cover;
+    background-position: center;;
+    background-repeat: no-repeat;
 }
 
-input, button {
-    font-size: 2rem;
-    padding: 1rem;
-    border-radius: 10px;
+input,
+button {
+    font-size: 2vw;
+    padding: 1vw; /* Adjust padding using vw units */
+    border-radius: 2vw; /* Adjust border radius using vw units */
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-right: 1vw; /* Adjust margin using vw units */
+}
+
+select[name="stats"] {
+    font-size: 0.9em;
+}
+
+#checkboxContainer {
+    column-count: 3;
+    column-gap: 2vw; /* Adjust column gap using vw units */
 }

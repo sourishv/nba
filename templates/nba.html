@@ -5,47 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            font-size: 200%;
-        }
-
-        .player-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 20px;
-        }
-
-        .player-container img {
-            max-width: 150px;
-            max-height: 150px;
-        }
-
-        .player-name {
-            margin-top: 10px; /* Added margin-top */
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            font-size: 24px;
-        }
-
-        .stat-item {
-            margin: 0 10px;
-        }
-
-        .comparison-container {
-            font-size: 24px;
-            margin: 20px 0;
-        }
-    </style>
+    <link href="{{ url_for('static', filename='styles/nba.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -63,9 +23,9 @@
     <div class="stats-container">
         {% for stat in selected_stats %}
         <div class="stat-item">
-            <p>{{ stat }} Per Game: {{ stats1[stat] }}</p>
+            <p>{{ stats1[stat] }} {{ stat }}</p>
             <span>{% if stats1[stat] > stats2[stat] %}&gt;{% elif stats1[stat] < stats2[stat] %}&lt;{% else %}={{ stats1[stat] }}{% endif %}</span>
-            <p>{{ stats2[stat] }} Per Game</p>
+            <p>{{ stats2[stat] }} {{ stat }}</p>
         </div>
         {% endfor %}
     </div>
