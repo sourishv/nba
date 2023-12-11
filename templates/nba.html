@@ -11,6 +11,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            font-size: 200%;
         }
 
         .player-container {
@@ -21,14 +22,19 @@
         }
 
         .player-container img {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        .player-name {
+            margin-top: 10px; /* Added margin-top */
         }
 
         .stats-container {
             display: flex;
             justify-content: space-around;
             align-items: center;
+            font-size: 24px;
         }
 
         .stat-item {
@@ -47,11 +53,11 @@
     <div class="player-container">
         <div>
             <img src="{{ player1_image_url }}" alt="{{ player1 }} Image">
-            <h2>{{ player1 }}</h2>
+            <h2 class="player-name">{{ player1 }}</h2>
         </div>
         <div>
             <img src="{{ player2_image_url }}" alt="{{ player2 }} Image">
-            <h2>{{ player2 }}</h2>
+            <h2 class="player-name">{{ player2 }}</h2>
         </div>
     </div>
     <div class="stats-container">
