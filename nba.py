@@ -1,16 +1,21 @@
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playercareerstats
-from difflib import get_close_matches
 import pandas as pd
+from fuzzywuzzy import process
+
 
 def get_player_image_url(player_id):
     return f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png"
+def names_list():
+        nba_players = players.get_players()
+        return [player['full_name'] for player in nba_players]
 
-def get_player_stats(my_player="LeBron James", selected_stats=None, season_type = "Regular"):
+def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type = "Regular"):
     nba_players = players.get_players()
 
     player_names = [player['full_name'] for player in nba_players]
-    my_player = get_close_matches(my_player, player_names, 1, 0)[0]
+    my_player = process.extract(my_player, player_names, limit=1)[0][0]
+    print(my_player)
 
     player_dict = next((player for player in nba_players if player['full_name'] == my_player), None)
 
@@ -50,4 +55,4 @@ def get_player_stats(my_player="LeBron James", selected_stats=None, season_type 
         # Convert all stats to a dictionary
         stats_dict = selected_data.to_dict()
 
-    return my_player, my_id, stats_dict, player_names
+    return my_player, my_id, stats_dict

@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, json, jsonify
-from nba import get_player_stats, get_player_image_url
+from nba import get_player_stats, get_player_image_url, names_list
 from waitress import serve
 from fuzzywuzzy import process
 
 app = Flask(__name__)
 
-player_names = get_player_stats()[3]
+player_names = names_list()
 player_names_json = json.dumps(player_names)
 
 @app.route('/')
@@ -20,8 +20,8 @@ def get_stats():
     selected_stats = request.form.getlist('stats[]')
     season_type = request.form.get('seasonType')
 
-    player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats, season_type)[:3]
-    player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats, season_type)[:3]
+    player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats, season_type)
+    player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats, season_type)
 
     rounded_stats1 = {key: round(value, 2) for key, value in stats1.items()}
     rounded_stats2 = {key: round(value, 2) for key, value in stats2.items()}
