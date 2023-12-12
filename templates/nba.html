@@ -24,7 +24,7 @@
         {% for stat in selected_stats %}
         <div class="stat-item">
             <p>{{ stats1[stat] }} {{ stat }}</p>
-            <span>{% if stats1[stat] > stats2[stat] %}&gt;{% elif stats1[stat] < stats2[stat] %}&lt;{% else %}={{ stats1[stat] }}{% endif %}</span>
+            <span>{% if stats1[stat] > stats2[stat] %}&gt;{% elif stats1[stat] < stats2[stat] %}&lt;{% else %}={% endif %}</span>
             <p>{{ stats2[stat] }} {{ stat }}</p>
         </div>
         {% endfor %}
