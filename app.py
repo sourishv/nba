@@ -23,6 +23,9 @@ def get_stats():
     player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats, season_type)
     player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats, season_type)
 
+    print(stats1)
+    print(stats2)
+
     rounded_stats1 = {key: round(value, 2) for key, value in stats1.items()}
     rounded_stats2 = {key: round(value, 2) for key, value in stats2.items()}
 

@@ -49,8 +49,10 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
 
     for stat in selected_stats:
         # Check if the stat is a percentage and average them
-        if stat in ["_PCT",'GS', 'GP']:
+        if stat in ['GS', 'GP']:
             stat_values = selected_data[stat].sum()
+        elif stat.endswith("_PCT"):
+            stat_values = selected_data[stat].sum()*100
         else:
             stat_values = (selected_data[stat].sum()) / (selected_data["GP"].sum())
         
