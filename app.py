@@ -18,9 +18,10 @@ def get_stats():
     player1 = request.form.get('player1')
     player2 = request.form.get('player2')
     selected_stats = request.form.getlist('stats[]')
+    season_type = request.form.get('seasonType')
 
-    player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats)[:3]
-    player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats)[:3]
+    player1_name, player1_id, stats1 = get_player_stats(player1, selected_stats, season_type)[:3]
+    player2_name, player2_id, stats2 = get_player_stats(player2, selected_stats, season_type)[:3]
 
     rounded_stats1 = {key: round(value, 2) for key, value in stats1.items()}
     rounded_stats2 = {key: round(value, 2) for key, value in stats2.items()}

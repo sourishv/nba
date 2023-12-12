@@ -6,7 +6,7 @@ import pandas as pd
 def get_player_image_url(player_id):
     return f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png"
 
-def get_player_stats(my_player="LeBron James", selected_stats=None):
+def get_player_stats(my_player="LeBron James", selected_stats=None, season_type = "Regular"):
     nba_players = players.get_players()
 
     player_names = [player['full_name'] for player in nba_players]
@@ -24,7 +24,10 @@ def get_player_stats(my_player="LeBron James", selected_stats=None):
     post_season_data = stat_frame[2]  # SeasonTotalsPostSeason
     
     # Combine regular season and post season data
-    combined_data = pd.concat([regular_season_data, post_season_data], ignore_index=True)
+    if season_type == "Regular":
+        selected_data = regular_season_data
+    else:
+        selected_data = post_season_data
 
     # Filter stats based on selected_stats
     if selected_stats:
@@ -34,18 +37,17 @@ def get_player_stats(my_player="LeBron James", selected_stats=None):
         for stat in selected_stats:
             # Check if the stat is a percentage and average them
             if stat.endswith("_PCT"):
-                stat_values = combined_data[stat].mean()
+                stat_values = selected_data[stat].mean()
             else:
                 # Calculate per game stats for non-percentage stats
                 if stat in ['GS', 'GP']:
-                    stat_values = combined_data[stat].sum()
+                    stat_values = selected_data[stat].sum()
                 else:
-                    stat_values = (combined_data[stat].sum())/(combined_data["GP"].sum())
-            print(stat_values)
+                    stat_values = (selected_data[stat].sum())/(selected_data["GP"].sum())
             stats_dict[stat] = stat_values
 
     else:
         # Convert all stats to a dictionary
-        stats_dict = combined_data.to_dict()
+        stats_dict = selected_data.to_dict()
 
     return my_player, my_id, stats_dict, player_names

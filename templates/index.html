@@ -22,8 +22,17 @@
         
         <label for="player2">Player 2:</label>
         <input type="text" name="player2" id="player2" placeholder="Enter the second player" required />
+
+        <br><br>
+
+        <label for="regular_stats"> Regular Season:</label>
+        <input type="checkbox" id="regular_stats" name="seasonType" value="Regular"/>
+        <label for="post_stats"> Post Season:</label>
+        <input type="checkbox" id="post_stats" name="seasonType" value="Post"/>
         
         <br><br>
+
+
 
         Choose Stats:
         <div id="checkboxContainer">
@@ -31,6 +40,8 @@
         </div>
 
         <br><br>
+        
+
 
         <button type="submit">Compare Players</button>
     </form>
