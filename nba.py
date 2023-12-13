@@ -1,6 +1,9 @@
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playercareerstats
 from fuzzywuzzy import process
+#import cProfile
+
+
 
 def get_player_image_url(player_id):
     return f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png"
@@ -10,16 +13,18 @@ def names_list():
     return [player['full_name'] for player in nba_players]
 
 def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type="Regular"):
+    #with cProfile.Profile() as pr:
     nba_players = players.get_players()
 
     player_names = [player['full_name'] for player in nba_players]
 
     # Find close matches using fuzzywuzzy
-    close_matches = process.extract(my_player, player_names, limit=50)
+    #need to find a good way to not have to go through 71 players (most common name)
+    close_matches = process.extract(my_player, player_names, limit=20)
     print(close_matches)
     top_match_pct = close_matches[0][1]
 
-    for i in range(50):
+    for i in range(20):
         if close_matches[i][1] != top_match_pct:
             close_matches = close_matches[:i]
             break
@@ -57,6 +62,7 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
             stat_values = (selected_data[stat].sum()) / (selected_data["GP"].sum())
         
         stats_dict[stat] = stat_values
+    #pr.print_stats()
 
     return my_player, my_id, stats_dict
 
