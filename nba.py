@@ -22,10 +22,9 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
     #need to find a good way to not have to go through 71 players (most common name)
     close_matches = process.extract(my_player, player_names, limit=20)
     print(close_matches)
-    top_match_pct = close_matches[0][1]
 
     for i in range(20):
-        if close_matches[i][1] != top_match_pct:
+        if close_matches[i][1] < 20:
             close_matches = close_matches[:i]
             break
 
