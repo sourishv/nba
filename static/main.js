@@ -2,9 +2,9 @@
 
 function addPredefinedStatsCheckboxes() {
     var predefinedStats = [
-        "GP", "GS", "MIN", "FGM", "FGA", "FG_PCT", "FG3M", "FG3A", "FG3_PCT",
-        "FTM", "FTA", "FT_PCT", "OREB", "DREB", "REB", "AST", "STL", "BLK",
-        "TOV", "PF", "PTS"
+        "Games Played", "Games Started", "Minutes", "Field Goals Made", "Field Goals Attempted", "3pt Made", "3pt Attempted"
+, "3pt%", "Free Throws Made", "Free Throws Attempted", "Offensive Rebounds", "Defensive Rebounds", "Rebounds", "Assists"
+, "Steals", "Blocks", "Turnovers", "Personal Fouls", "Points"
     ];
 
     var container = document.getElementById("checkboxContainer");

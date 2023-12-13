@@ -21,11 +21,11 @@
         </div>
     </div>
     <div class="stats-container">
-        {% for stat in selected_stats %}
+        {% for stat in grouped_stats %}
         <div class="stat-item">
-            <p>{{ stats1[stat] }} {{ stat }}</p>
-            <span>{% if stats1[stat] > stats2[stat] %}&gt;{% elif stats1[stat] < stats2[stat] %}&lt;{% else %}={% endif %}</span>
-            <p>{{ stats2[stat] }} {{ stat }}</p>
+            <p>{{ stats1[stat[1]] }} {{ stat[0] }}</p>
+            <span>{% if stats1[stat[1]] > stats2[stat[1]]%}&gt;{% elif stats1[stat[1]] < stats2[stat[1]] %}&lt;{% else %}={% endif %}</span>
+            <p>{{ stats2[stat[1]] }} {{ stat[0] }}</p>
         </div>
         {% endfor %}
     </div>

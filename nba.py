@@ -14,6 +14,30 @@ def names_list():
 
 def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type="Regular"):
     #with cProfile.Profile() as pr:
+    name_converter = {
+    'Games Played': 'GP',
+    'Games Started': 'GS',
+    'Minutes': 'MIN',
+    'Field Goals Made': 'FGM',
+    'Field Goals Attempted': 'FGA',
+    '3pt Made': 'FG3M',
+    '3pt Attempted': 'FG3A',
+    '3pt%': 'FG3_PCT',
+    'Free Throws Made': 'FTM',
+    'Free Throws Attempted': 'FTA',
+    'Offensive Rebounds': 'OREB',
+    'Defensive Rebounds': 'DREB',
+    'Rebounds': 'REB',
+    'Assists': 'AST',
+    'Steals': 'STL',
+    'Blocks': 'BLK',
+    'Turnovers': 'TOV',
+    'Personal Fouls': 'PF',
+    'Points': 'PTS'
+}
+    stat_ids = [name_converter[stat] for stat in selected_stats]
+    print(stat_ids)
+
     nba_players = players.get_players()
 
     player_names = [player['full_name'] for player in nba_players]
@@ -22,9 +46,9 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
     #need to find a good way to not have to go through 71 players (most common name)
     close_matches = process.extract(my_player, player_names, limit=20)
     print(close_matches)
-
+    top_match = close_matches[0][1]
     for i in range(20):
-        if close_matches[i][1] < 20:
+        if close_matches[i][1] < 90:
             close_matches = close_matches[:i]
             break
 
@@ -47,11 +71,10 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
     # Combine regular season and post season data
     selected_data = regular_season_data if season_type == "Regular" else post_season_data
 
-    # Filter stats based on selected_stats
-    selected_stats = set(selected_stats)
+    # Filter stats based on stat_ids
     stats_dict = {}
 
-    for stat in selected_stats:
+    for stat in stat_ids:
         # Check if the stat is a percentage and average them
         if stat in ['GS', 'GP']:
             stat_values = selected_data[stat].sum()
@@ -59,11 +82,12 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
             stat_values = selected_data[stat].sum()*100
         else:
             stat_values = (selected_data[stat].sum()) / (selected_data["GP"].sum())
+
         
         stats_dict[stat] = stat_values
     #pr.print_stats()
 
-    return my_player, my_id, stats_dict
+    return my_player, my_id, stats_dict, stat_ids
 
 def get_points_per_game(player_name, season_type="Regular"):
     player_id = get_player_id_by_name(player_name)
