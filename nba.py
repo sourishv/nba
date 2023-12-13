@@ -82,7 +82,8 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
             stat_values = selected_data[stat].sum()*100
         else:
             stat_values = (selected_data[stat].sum()) / (selected_data["GP"].sum())
-
+            if stat in ['PF', 'TOV']:
+                stat_values = -stat_values
         
         stats_dict[stat] = stat_values
     #pr.print_stats()
