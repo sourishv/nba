@@ -9,30 +9,35 @@ body {
 .player-container {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: end;
     margin: 40px;
+}
+.player-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .player-container img {
     width: 100px;
-    margin-right: 500px;
     margin-left: 500px;
-    margin-bottom: 100px;
+    margin-right: 500px;
     margin-top: 100px;
     transform: scale(2.5);
 }
 
 .stats-container {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-top: -250px;
+    margin-top: -125px
 }
 
 .stat-item {
     margin: 0 10px;
     transform: scale(1.5);
-    margin-bottom: 100px;
+    margin-bottom: 10px;
     margin-left: 40px;
     margin-right: 40px;
 }
