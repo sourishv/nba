@@ -5,47 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Compare NBA Players!</title>
-<<<<<<< HEAD
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding-top: 150px;
-        }
-        .autocomplete {
-            /*the container must be positioned relative:*/
-            position: relative;
-            display: inline-block;
-        }
-        /* Add custom styling for smaller checkboxes and stat options */
-        input[type="checkbox"] {
-            transform: scale(1.5);
-            margin-right: 5px;
-        }
-
-        select[name="stats"] {
-            font-size: 0.9em;
-        }
-
-        /* Add styling for the three-column layout */
-        #checkboxContainer {
-            column-count: 3;
-            column-gap: 20px;
-        }
-    </style>
-    <!-- Include other styles or scripts as needed -->
-    <script src=""autocomplete.js"></script>
-    <script>   var names_json = Array.from(player_names);    </script>
-=======
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
     
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
->>>>>>> 9a617298378a3c607f0895af3f18f126430c41f9
 </head>
 
 <body>
@@ -83,22 +47,7 @@
     </form>
 
     <script>
-<<<<<<< HEAD
-        autocomplete(document.getElementById("player1"), names_json);
-        autocomplete(document.getElementById("player2"), names_json);
-    </script>
-
-    <script>
-        var predefinedStats = [
-            "GP", "GS", "MIN", "FGM", "FGA", "FG_PCT", "FG3M", "FG3A", "FG3_PCT",
-            "FTM", "FTA", "FT_PCT", "OREB", "DREB", "REB", "AST", "STL", "BLK",
-            "TOV", "PF", "PTS"
-        ];
-
-        // Automatically add checkboxes on page load
-=======
         // This section contains specific calls from main.js
->>>>>>> 9a617298378a3c607f0895af3f18f126430c41f9
         document.addEventListener("DOMContentLoaded", function () {
             var playerNamesJson = {{ player_names | tojson | safe }};
             var names_json = JSON.parse(playerNamesJson);
