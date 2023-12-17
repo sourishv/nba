@@ -52,6 +52,9 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
             close_matches = close_matches[:i]
             break
 
+<<<<<<< HEAD
+    my_id = str(player_dict["id"])
+=======
     # Sort close matches by points per game (you might need to replace 'PTS' with the actual stat you want to use)
     close_matches = sorted(close_matches, key=lambda x: get_points_per_game(x[0], season_type), reverse=True)
 
@@ -60,6 +63,7 @@ def get_player_stats(my_player="LeBron James", selected_stats="PTS", season_type
     print(my_player)
 
     my_id = get_player_id_by_name(my_player)
+>>>>>>> 9a617298378a3c607f0895af3f18f126430c41f9
     my_player_stats = playercareerstats.PlayerCareerStats(player_id=my_id)
 
     stat_frame = my_player_stats.get_data_frames()
