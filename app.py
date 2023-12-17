@@ -20,6 +20,9 @@ def get_stats():
     selected_stats = request.form.getlist('stats[]')
     season_type = request.form.get('seasonType')
 
+    if season_type is None:
+        season_type = 'Regular Season'
+
     player1_name, player1_id, stats1, stat_ids = get_player_stats(player1, selected_stats, season_type)
     player2_name, player2_id, stats2, stat_ids = get_player_stats(player2, selected_stats, season_type)
 
